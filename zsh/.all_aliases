@@ -1,5 +1,9 @@
 alias lss='ls -ltra'
 alias lsdot='ls -dl .[^.]* .'
 
+# Go to web projects root
+alias web='cd ~/spear_development/web'
+
 # Sync mac-setup project to external SSD
-alias sync-mac-setup='rsync -av ~/projects/mac-setup/ /Volumes/spear_development/logs/work/sbalan/development/mac-setup/ && echo "Synced to spear_development"'
+# Snapshots live zsh configs into repo first, then rsyncs everything
+alias sync-mac-setup='cp ~/.zshrc ~/projects/mac-setup/zsh/.zshrc && cp ~/.all_aliases ~/projects/mac-setup/zsh/.all_aliases && rsync -av ~/projects/mac-setup/ /Volumes/spear_development/logs/work/sbalan/development/mac-setup/ && echo "Synced to spear_development"'

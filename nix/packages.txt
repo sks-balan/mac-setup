@@ -4,6 +4,7 @@
 #   xargs -I{} nix profile install nixpkgs#{} < packages.txt
 
 btop
+fnm
 gh
 git
 ncdu
