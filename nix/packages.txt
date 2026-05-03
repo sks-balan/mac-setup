@@ -1,0 +1,11 @@
+# Nix packages - install with:
+#   nix profile install nixpkgs#<package>
+# Or to install all at once:
+#   xargs -I{} nix profile install nixpkgs#{} < packages.txt
+
+btop
+ncdu
+neovim
+ripgrep
+tmux
+git

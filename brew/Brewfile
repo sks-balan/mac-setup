@@ -1,0 +1,5 @@
+# CLI tools are managed by Nix (see ../nix/packages.txt)
+# Install with: brew bundle install
+
+# Add any GUI apps (casks) or Mac-specific tools here
+# Example: cask "iterm2"

@@ -1,0 +1,5 @@
+alias lss='ls -ltra'
+alias lsdot='ls -dl .[^.]* .'
+
+# Sync mac-setup project to external SSD
+alias sync-mac-setup='rsync -av ~/projects/mac-setup/ /Volumes/spear_development/logs/work/sbalan/development/mac-setup/ && echo "Synced to spear_development"'
