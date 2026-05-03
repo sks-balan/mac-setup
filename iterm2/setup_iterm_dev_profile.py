@@ -46,13 +46,22 @@ with open(PLIST_PATH, 'rb') as f:
     prefs = plistlib.load(f)
 
 profiles = prefs.get('New Bookmarks', [])
+dev_guid = None
 for p in profiles:
     if p.get('Name') == 'Dev':
         p['Keyboard Map'] = KEY_MAPPINGS
         p['Option Key Sends'] = 2       # Esc+ for Option key
         p['Right Option Key Sends'] = 2
+        dev_guid = p.get('Guid')
         print(f"Updated Dev profile with {len(KEY_MAPPINGS)} key mappings")
         break
+
+# Set Dev as the default profile
+if dev_guid:
+    prefs['Default Bookmark Guid'] = dev_guid
+    print("Set Dev as default profile")
+else:
+    print("WARNING: Dev profile not found — create it in iTerm2 first, then re-run this script")
 
 with open(PLIST_PATH, 'wb') as f:
     plistlib.dump(prefs, f)
