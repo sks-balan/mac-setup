@@ -4,8 +4,9 @@
 #   xargs -I{} nix profile install nixpkgs#{} < packages.txt
 
 btop
+gh
+git
 ncdu
 neovim
 ripgrep
 tmux
-git

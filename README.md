@@ -27,7 +27,7 @@ mac-setup/
 ## Fresh Mac Setup
 
 ```bash
-git clone <repo-url> ~/projects/mac-setup
+git clone git@github.com:sks-balan/mac-setup.git ~/projects/mac-setup
 cd ~/projects/mac-setup
 ./scripts/bootstrap.sh
 ```
