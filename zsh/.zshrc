@@ -116,6 +116,11 @@ if command -v fnm &>/dev/null; then
   eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
+# Local env vars (gitignored, machine-specific)
+if [ -f ~/projects/mac-setup/.env ]; then
+  set -a; source ~/projects/mac-setup/.env; set +a
+fi
+
 # Aliases
 source ~/.all_aliases
 

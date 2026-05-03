@@ -9,6 +9,14 @@ ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
 echo "==> Starting Mac setup..."
 
+# Load local env vars (.env is gitignored)
+if [ -f "$ROOT_DIR/.env" ]; then
+  set -a; source "$ROOT_DIR/.env"; set +a
+else
+  echo "WARNING: No .env file found. Copy .env.example to .env and fill in your values."
+  echo "         Some steps (spear symlink) will be skipped."
+fi
+
 # 1. Install Homebrew if not present
 if ! command -v brew &>/dev/null; then
   echo "==> Installing Homebrew..."
@@ -82,9 +90,9 @@ if [ -d "/Volumes/spear_development" ]; then
   ln -sf "/Volumes/spear_development" "$HOME/spear_development"
   mkdir -p "/Volumes/spear_development/web"
   echo "    Symlink created, web/ folder ready"
-elif [ -d "/Volumes/spear/logs/work/sbalan/development" ]; then
-  ln -sf "/Volumes/spear/logs/work/sbalan/development" "$HOME/spear_development"
-  mkdir -p "/Volumes/spear/logs/work/sbalan/development/web"
+elif [ -n "$SPEAR_USER" ] && [ -d "/Volumes/spear/logs/work/$SPEAR_USER/development" ]; then
+  ln -sf "/Volumes/spear/logs/work/$SPEAR_USER/development" "$HOME/spear_development"
+  mkdir -p "/Volumes/spear/logs/work/$SPEAR_USER/development/web"
   echo "    Symlink created (via spear volume), web/ folder ready"
 else
   echo "    WARNING: No spear volume mounted — skipping symlink"
