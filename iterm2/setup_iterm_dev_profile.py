@@ -30,7 +30,7 @@ KEY_MAPPINGS = {
     '0xf72b-0x200000-0x77': key(HEX_CODE, '0x05'),       # End          → end of line
 
     # --- Delete operations ---
-    '0x7f-0x80000-0x33':    key(HEX_CODE, '0x1b 0x7f'),  # Option+Backspace → delete word backward
+    '0x7f-0x80000-0x33':    key(HEX_CODE, '0x17'),        # Option+Backspace → delete word backward (Ctrl+W)
     '0xf728-0x280000-0x75': key(HEX_CODE, '0x1b 0x64'),  # Option+Delete    → delete word forward
     '0x7f-0x100000-0x33':   key(HEX_CODE, '0x15'),       # Cmd+Backspace    → delete to start of line
     '0xf728-0x300000-0x75': key(HEX_CODE, '0x0b'),       # Cmd+Delete       → delete to end of line
