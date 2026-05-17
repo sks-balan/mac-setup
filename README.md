@@ -13,10 +13,15 @@ mac-setup/
 │   └── HEProfile-*.json      # Keychron HE actuation profile
 ├── nix/
 │   └── packages.txt          # Cross-platform dev tools (ripgrep, tmux, neovim, etc.)
+├── podman/
+│   ├── Dockerfile.cpp-dev    # Fedora-based C++ dev image (GCC 16, Clang 22, CMake, GDB)
+│   └── setup.sh              # One-shot SSD + Podman machine + image setup
 ├── rectangle/
 │   └── RectangleConfig.json  # Rectangle window manager shortcuts
 ├── scripts/
 │   └── bootstrap.sh          # Main setup script
+├── tools/
+│   └── start-dev.sh          # Launch C++ dev container (copied to SSD by setup.sh)
 ├── vscode/
 │   └── extensions.txt        # VS Code extensions reference list
 └── zsh/
@@ -71,9 +76,29 @@ xargs -I{} /nix/var/nix/profiles/default/bin/nix profile install nixpkgs#{} < ni
 nix profile install nixpkgs#ripgrep
 ```
 
+## C++ Dev Environment
+
+The dev environment runs in a Fedora container via Podman, with all data (VM, images, code) on the `spear_development` SSD. The code directory inside the container mirrors the work path exactly:
+
+- **Mac path**: `/Volumes/spear_development/logs/work/sbalan/development`
+- **Container path**: `/logs/work/sbalan/development`
+
+```bash
+# First-time setup (SSD must be mounted)
+./podman/setup.sh
+
+# Daily use
+/Volumes/spear_development/logs/work/sbalan/tools/start-dev.sh
+```
+
+Inside the container: GCC 16, Clang 22, GDB, LLDB, CMake, Ninja, clang-format, clang-tidy.
+
 ## Notes
 
 - Keychron profile must be imported manually via launcher.keychron.com
+- Restart iTerm2 to apply Dev profile
+- Open a new terminal for all PATH changes to take effect
 - VS Code extensions at work may need to be installed via internal Artifactory
 - spear_development symlink requires /Volumes/spear to be mounted
 - Nix installed via Determinate Systems installer (flakes enabled by default)
+- Podman setup skipped by bootstrap.sh if SSD not mounted — run podman/setup.sh manually

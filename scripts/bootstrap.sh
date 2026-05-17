@@ -22,6 +22,7 @@ STEPS=(
   "node"
   "claude_code"
   "spear_symlink"
+  "podman_setup"
 )
 LABELS=(
   "Env file (.env)"
@@ -36,6 +37,7 @@ LABELS=(
   "Node.js LTS (fnm)"
   "Claude Code CLI"
   "Spear symlink"
+  "Podman C++ dev env"
 )
 
 mark() { STATUS[$1]=$2; }  # pass step key and "ok", "skip", or "fail"
@@ -185,7 +187,7 @@ else
 fi
 
 # ── 12. Spear symlink ─────────────────────────────────────────────────────────
-echo "==> [12/12] Spear symlink..."
+echo "==> [12/13] Spear symlink..."
 if [ -d "/Volumes/spear_development" ]; then
   ln -sf "/Volumes/spear_development" "$HOME/spear_development"
   mkdir -p "/Volumes/spear_development/web"
@@ -199,4 +201,18 @@ elif [ -n "$SPEAR_USER" ] && [ -d "/Volumes/spear/logs/work/$SPEAR_USER/developm
 else
   echo "    WARNING: No spear volume mounted — skipping symlink"
   mark spear_symlink skip
+fi
+
+# ── 13. Podman C++ dev environment ────────────────────────────────────────────
+echo "==> [13/13] Podman C++ dev environment..."
+if [ -d "/Volumes/spear_development" ]; then
+  if bash "$ROOT_DIR/podman/setup.sh"; then
+    mark podman_setup ok
+  else
+    mark podman_setup fail
+  fi
+else
+  echo "    WARNING: spear_development SSD not mounted — skipping Podman setup"
+  echo "    Run podman/setup.sh manually once the SSD is attached."
+  mark podman_setup skip
 fi

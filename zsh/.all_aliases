@@ -1,6 +1,9 @@
 alias lss='ls -ltra'
 alias lsdot='ls -dl .[^.]* .'
 
+# Podman as drop-in Docker replacement
+alias docker='podman'
+
 # Go to web projects root
 alias web='cd ~/spear_development/web'
 

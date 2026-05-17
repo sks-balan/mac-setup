@@ -1,5 +1,9 @@
 # CLI tools are managed by Nix (see ../nix/packages.txt)
 # Install with: brew bundle install
 
+# Container runtime for C++ dev environment (see podman/setup.sh)
+brew "podman"
+brew "vfkit"
+
 # Add any GUI apps (casks) or Mac-specific tools here
 # Example: cask "iterm2"

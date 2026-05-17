@@ -1,0 +1,18 @@
+FROM fedora:latest
+
+RUN dnf install -y \
+    gcc-c++ \
+    clang \
+    gdb \
+    lldb \
+    cmake \
+    make \
+    ninja-build \
+    clang-tools-extra \
+    pkg-config \
+    git \
+    which \
+    findutils \
+    && dnf clean all
+
+WORKDIR /logs/work/sbalan/development
