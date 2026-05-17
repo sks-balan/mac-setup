@@ -8,10 +8,10 @@ alias docker='podman'
 alias web='cd ~/spear_development/web'
 
 # Eject spear SSD (both spear and spear_development volumes)
-alias eject-spear='diskutil eject $(diskutil info /Volumes/spear 2>/dev/null | grep "Part of Whole" | awk '"'"'{print $NF}'"'"') && echo "Spear SSD ejected"'
+alias eject-spear='if [ -d /Volumes/spear ]; then diskutil eject $(diskutil info /Volumes/spear | grep "Part of Whole" | awk '"'"'{print $NF}'"'"') && echo "Spear SSD ejected"; else echo "Spear SSD already ejected"; fi'
 
 # Stop Podman and eject spear SSD
-alias spear-stop='podman machine stop spear-dev && eject-spear'
+alias spear-stop='podman machine stop spear-dev 2>/dev/null || true && eject-spear'
 
 # Sync mac-setup project to external SSD
 # Snapshots live zsh configs into repo first, then rsyncs everything
